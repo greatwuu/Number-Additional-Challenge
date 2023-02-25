@@ -52,6 +52,11 @@ namespace WindowsFormsApp1
                 point = 0;
                 pointBox.Text = Convert.ToString(point);
                 MessageBox.Show("Game Over \r\nCan view records at " + path, "Game Over");//Show user a logging path
+                timerBox.ForeColor = Color.Black;
+            }
+            else if (seconds < 10 && seconds != 0)
+            {
+                timerBox.ForeColor = Color.Red;
             }
         }
 
@@ -134,7 +139,27 @@ namespace WindowsFormsApp1
             number2Box.Text = Convert.ToString(r2);
         }
 
-        
+        private void helpMenu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("When User input the sum challenge will start \r\n" +
+                "+1 Point if answer is correct\r\n"+
+                "-1 Point if answer is incorrect\r\n"+
+                "Game over if timer run out\r\n", "Help Windows");
+        }
+
+        private void viewScoreRecToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //StreamReader streamReader = new StreamReader(path);
+            //MessageBox.Show(streamReader.ReadToEnd(), "Score Record");
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C" + path;
+            process.StartInfo = startInfo;
+            process.Start();
+
+        }
 
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {
