@@ -53,7 +53,7 @@ namespace WindowsFormsApp1
                 timerBox.ForeColor = Color.Black; //Set text back to original colour
                 timerBox.Text = "60"; //Reset timer to initial value
                 pointBox.Text = Convert.ToString(point);
-                MessageBox.Show("Game Over \r\nCan view records at " + path, "Game Over");//Show user a logging path
+                MessageBox.Show("Game Over", "Game Over");//Show user a logging path
                 timerBox.ForeColor = Color.Black;
             }
             else if (seconds <= 10 && seconds != 0)
