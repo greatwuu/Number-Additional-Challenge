@@ -45,18 +45,20 @@ namespace WindowsFormsApp1
 
             if (seconds < 0)
             {
-                formTimer.Stop();
+                formTimer.Stop();//Stop the timer
                 gameState = false;
-                btnReg = true;
+                btnReg = false;
                 File.AppendAllText(path, Environment.NewLine + userName + "," + Convert.ToString(point));
-                point = 0;
+                point = 0;//Reset Point
+                timerBox.ForeColor = Color.Black; //Set text back to original colour
+                timerBox.Text = "60"; //Reset timer to initial value
                 pointBox.Text = Convert.ToString(point);
                 MessageBox.Show("Game Over \r\nCan view records at " + path, "Game Over");//Show user a logging path
                 timerBox.ForeColor = Color.Black;
             }
-            else if (seconds < 10 && seconds != 0)
+            else if (seconds <= 10 && seconds != 0)
             {
-                timerBox.ForeColor = Color.Red;
+                timerBox.ForeColor = Color.Red;//Warn player if time < 10s
             }
         }
 
@@ -68,6 +70,12 @@ namespace WindowsFormsApp1
             generateNumber();
 
             InputBox("User Name Input", "Please input your username, \r\n leave blank for anonymous", ref userName);
+            MessageBox.Show("When User input the sum challenge will start \r\n" +
+                "1. User need to put a sum value of two number\r\n" +
+                "2. Timer will start after user input the first answer\r\n" +
+                "3. +1 Point if answer is correct\r\n" +
+                "4. -1 Point if answer is incorrect\r\n" +
+                "5.  Game over if timer run out\r\n", "Help Windows");
 
             if (!File.Exists(path))//Create a new files if there is no existing files
             {
@@ -137,14 +145,6 @@ namespace WindowsFormsApp1
             int r2 = (new Random()).Next(10, 100);
             number1Box.Text = Convert.ToString(r1);
             number2Box.Text = Convert.ToString(r2);
-        }
-
-        private void helpMenu_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("When User input the sum challenge will start \r\n" +
-                "+1 Point if answer is correct\r\n"+
-                "-1 Point if answer is incorrect\r\n"+
-                "Game over if timer run out\r\n", "Help Windows");
         }
 
         private void viewScoreRecToolStripMenuItem_Click(object sender, EventArgs e)
